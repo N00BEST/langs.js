@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div t-translate="juego"></div>
+    <div t-translate="index">index</div>
+    <script>
+        
+        function init(){
+            var words = document.querySelectorAll('[t-translate]');
+            for(var i = 0; i < words.length; i++){
+                var word = words[i].getAttribute('t-translate');
+                var result = translate(word);
+                words[i].innerHTML = result;
+            }
+            console.log(words);
+        }
+
+        function translate(word){
+            var db = database();
+            return db[word];
+        }
+
+        function database(){
+            var words = {
+                'customer.welcome': 'Bienvenido a mi web',
+                'lorem': 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sed cum recusandae veniam doloribus expedita, tempore cupiditate animi culpa dolore odio aperiam laudantium quos, dolores, rerum in hic quis accusantium! Distinctio.',
+                'juego': 'needForSpeed',
+                'index': 'inicio'
+            };
+
+            return words;
+        }
+
+
+    </script>
+</body>
+</html>
