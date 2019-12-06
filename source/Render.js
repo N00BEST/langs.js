@@ -24,20 +24,17 @@ class Render {
      */
     renderElement(node) {
         let attributes = node.attributes;
+        let minimumLength = "t-translate".length;
 
         // get just the relevant attributes
-        attributes = attributes.filter((attribute) => {
-            let translations = /^t-translate/i;
-            let args = /^t-args/i;
-            return translations.test(attribute) || args.test(attribute);
-        });
+        attributes = this.filterAttributes(attributes);
 
         for(attribute of attributes) {
             let route = node.getAttribute(attribute);
-            if(attribute.length === 't-translate'.length ) {
+            if(attribute.length === minimumLength ) {
                 // let args = this.parseArgs(node.getAttribute('t-args'));
                 node.innerText = this.translator.translate(route/*, args*/);
-            } else if (attribute.indexOf(':') !== false) {
+            } else if (attribute.indexOf(':') > minimumLength) {
                 // It's a attribute to be translated instead of element inner text
                 let parts = attribute.explode(':');
                 let target = parts[1];
@@ -48,6 +45,19 @@ class Render {
                 this.renderAttribute(node, target, route/*, args*/);
             }
         }
+    }
+
+    filterAttributes(attributes) {
+        let finalAttributes = [];
+        let translations = /^t-translate/i;
+        let args = /^t-args/i;
+
+        for(attribute of attributes) {
+            if(translations.test(attribute.localName) || args.test(attribute.localName))
+                finalAttributes.push(attribute);
+        }
+
+        return finalAttributes;
     }
 
     // Define setters 
