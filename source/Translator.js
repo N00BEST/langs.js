@@ -22,7 +22,7 @@ class Translator {
      * 
      * @return string 
      */
-    translate(route, args = []) {
+    translate(route, args = {}) {
         let lang = this.lang;
 
         if (lang === null)
@@ -66,7 +66,7 @@ class Translator {
      * 
      * @return string 
      */
-    write(route, args = []) {
+    write(route, args = {}) {
         let lang = this.lang;
 
         if (lang === null) {
