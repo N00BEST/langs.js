@@ -13,9 +13,9 @@ class Render {
 
     searchTags() {
         let nodes = document.querySelectorAll('translate');
-         for(let node of nodes){
-             this.renderTag(node);
-         }
+        for(let node of nodes){
+            this.renderTag(node);
+        }
     }
 
     searchAttributes(){
@@ -28,12 +28,14 @@ class Render {
 
     /**
      * Translate the content in tag and replace the same tag.
-     * @param {node} node 
+     * @param {Node} node 
      */
     renderTag(node){
         let route = node.innerText;
 
-        node.outerHTML = this.translator.translate(route/*, args*/);
+        let args = this.parseTranslateArgs(node);
+
+        node.outerHTML = this.translator.translate(route, args);
     }
     
     /**
@@ -91,6 +93,23 @@ class Render {
         }
 
         return finalAttributes;
+    }
+
+    /**
+     * Takes the node of name translate and return the
+     * arg object for it
+     * 
+     * @param {Node} node 
+     */
+    parseTranslateArgs(node) {
+        let args = {};
+        let attributesMap = node.attributes;
+
+        for(let attribute of attributesMap) {
+            args[attribute.localName] = attribute.value;
+        }
+
+        return args;
     }
 
     // Define setters 
