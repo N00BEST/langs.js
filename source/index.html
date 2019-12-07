@@ -8,23 +8,31 @@
 </head>
 <body>
 
-    <select id="language-selector" onChange="window.location.href = '?lang=' + this.value;">
+    <!-- <select id="language-selector" onChange="window.location.href = '?lang=' + this.value;">
         <option value="en">English</option>
         <option value="es">Español</option>
-    </select>
+    </select> -->
+    <div>
+        <translate>customer.login</translate>
+        <ul>
+            <li t-translate="customer.title">Hola</li>
+            <li>Cómo <translate>customer.title</translate></li>
+            <li>Estas</li>
+            <li>gente</li>
+            <li>Rara</li>
+        </ul>
+    </div>
     
     <script src="es.js"></script>
     <script src="en.js"></script>
     <script src="Translator.js"></script>
+    <script src="Render.js"></script>
     <script>
         let urlParams = new URLSearchParams(window.location.search);
         let lang = urlParams.get('lang') || 'en';
-        let translator = new Translator(lang, LANGS);
+        let render = new Render(lang, LANGS);
 
-        translator.write('welcome-to', {'page': 'Langs.js'});
-        translator.write('customer.login');
-
-        document.getElementById('language-selector').value = lang;
+        render.play();
     </script>
 </body>
 </html>

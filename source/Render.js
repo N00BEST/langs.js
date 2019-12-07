@@ -4,6 +4,39 @@ class Render {
     }
 
     /**
+     * Search for elements to make render
+     */
+    play(){
+        this.searchTags();
+        this.searchAttributes();
+    }
+
+    searchTags() {
+        let nodes = document.querySelectorAll('translate');
+         for(let node of nodes){
+             this.renderTag(node);
+         }
+    }
+
+    searchAttributes(){
+        let nodes = document.querySelectorAll('[t-translate]');
+
+        for(let node of nodes){
+            this.renderElement(node);
+        }
+    }
+
+    /**
+     * Translate the content in tag and replace the same tag.
+     * @param {node} node 
+     */
+    renderTag(node){
+        let route = node.innerText;
+
+        node.outerHTML = this.translator.translate(route/*, args*/);
+    }
+    
+    /**
      * Translates the text given in route parameter and sets it
      * as value for the attribute "attribute" of the given node.
      * 
@@ -13,6 +46,7 @@ class Render {
      * @param {object} args 
      */
     renderAttribute(node, attribute, route, args = {}) {
+        console.log("Entra a render attribute");
         let translation = this.translator.translate(route, args);
         node.setAttribute(attribute, translation);
     }
@@ -28,15 +62,14 @@ class Render {
 
         // get just the relevant attributes
         attributes = this.filterAttributes(attributes);
-
-        for(attribute of attributes) {
+        for(let attribute of attributes) {
             let route = node.getAttribute(attribute);
             if(attribute.length === minimumLength ) {
                 // let args = this.parseArgs(node.getAttribute('t-args'));
                 node.innerText = this.translator.translate(route/*, args*/);
-            } else if (attribute.indexOf(':') > minimumLength) {
+            } else if (attribute.indexOf(':') === minimumLength) {
                 // It's a attribute to be translated instead of element inner text
-                let parts = attribute.explode(':');
+                let parts = attribute.split(':');
                 let target = parts[1];
 
                 // let args = 't-args:' + target;
@@ -52,9 +85,9 @@ class Render {
         let translations = /^t-translate/i;
         let args = /^t-args/i;
 
-        for(attribute of attributes) {
+        for(let attribute of attributes) {
             if(translations.test(attribute.localName) || args.test(attribute.localName))
-                finalAttributes.push(attribute);
+                finalAttributes.push(attribute.localName);
         }
 
         return finalAttributes;
