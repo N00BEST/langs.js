@@ -29,7 +29,9 @@
         <br>
 		<input type="text" t-translate t-translate:placeholder="customer.name">
 		<input type="text" t-translate t-translate:placeholder="welcome-to" t-args:placeholder:page="Otro sitio web">
-    </div>
+	</div>
+	
+	<button onClick="changeLanguage()" >Cambiar Idioma</button>
     
     <script src="es.js"></script>
     <script src="en.js"></script>
@@ -43,7 +45,18 @@
 			langs: LANGS
 		});
 
-        render.renderAll();
+		render.renderAll();
+		
+		function changeLanguage() {
+			if(lang === 'es')
+				lang = 'en';
+			else 
+				lang = 'es';
+
+			render.language = lang;
+
+			render.renderAll();
+		}
     </script>
 </body>
 </html>
