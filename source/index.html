@@ -8,10 +8,10 @@
 </head>
 <body>
 
-    <!-- <select id="language-selector" onChange="window.location.href = '?lang=' + this.value;">
+    <select id="language-selector" onChange="window.location.href = '?lang=' + this.value;">
         <option value="en">English</option>
         <option value="es">Español</option>
-    </select> -->
+    </select>
     <div>
         <translate>customer.login</translate>
         <ul>
@@ -23,8 +23,12 @@
         </ul>
 
         <translate page="Mi Sitio Web">welcome-to</translate>
+        <hr>
+        <div t-translate="welcome-to" t-args:page="Mi Sitio Web"></div>
+        <hr>
         <br>
-        <input type="text" t-translate t-translate:placeholder="customer.name">
+		<input type="text" t-translate t-translate:placeholder="customer.name">
+		<input type="text" t-translate t-translate:placeholder="welcome-to" t-args:placeholder:page="Otro sitio web">
     </div>
     
     <script src="es.js"></script>
@@ -33,10 +37,13 @@
     <script src="Render.js"></script>
     <script>
         let urlParams = new URLSearchParams(window.location.search);
-        let lang = urlParams.get('lang') || 'en';
-        let render = new Render(lang, LANGS);
+		let lang = urlParams.get('lang') || 'en';
+        let render = new Render({
+			currentLang: lang,
+			langs: LANGS
+		});
 
-        render.play();
+        render.renderAll();
     </script>
 </body>
 </html>
