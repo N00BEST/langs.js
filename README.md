@@ -9,9 +9,11 @@ Let's asume we have translations for both English and Spanish languages, so, the
 
 Will render in our website, after being processed by the library, as: 
 - *English*:
+
 `<div class="welcome-message">Welcome to My Website!</div>`
 
 - *Spanish*:
+
 `<div class="welcome-message">Bienvenido a My Website!</div>`
 
 This behavior can be achieved also with the with the *`t-translate`* attribute inside our tags defining the elements as follow:
@@ -26,9 +28,11 @@ We can also target for a most specific level with the *`t-translate`* attribute 
 
 It will render as:
 - *English*:
+
 `<input placeholder="Identification Number" t-translate t-translate:placeholder="customer.id">`
 
 - *Spanish*:
+
 `<input placeholder="Documento de Identificación" t-translate t-translate:placeholder="customer.id">`
 ***
 ### Instalation
