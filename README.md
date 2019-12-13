@@ -58,7 +58,28 @@ The Langs object accepts an object with three configurable options for the trans
 This attribute sets the language the elements will be translated to. This element should be a defined key in the `langsLibrary` array.
 
 - **langsLibrary:**
-This defines the languages database with all the respective translations for the website. (See *langsLibrary section* below for more details)
+This expects an object's array that defines the languages database with all the respective translations for the website. (See *langsLibrary section* below for more details)
 
 - **separator:**
 This parameter tells the translation system if we are using a "dot notation" (.) in our routes system or any other separator we choose to have.
+
+#### langsLibrary Array
+The `langsLibrary` is an array where the keys corresponds to the language ISO 639-1 code and the value are multiple objects, all with the same structure where the final values have the text to be replaced in the HTML DOM. We have some languaje files alredy defined in the repository for you to use or modify as you need in your project.
+
+##### Examples:  
+
+    LANGS['en'] = {
+        'welcome': 'Welcome',
+        'customer': {
+            'title': 'Customer',
+            'welcome-to': 'Welcome to :page!'
+        }
+    };
+    
+    LANGS['es'] = {
+        'welcome': 'Bienvenido',
+        'customer': {
+            'title': 'Cliente',
+            'welcome-to': 'Bienvenido a :page!'
+        }
+    }
