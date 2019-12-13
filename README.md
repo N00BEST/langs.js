@@ -9,7 +9,8 @@ To install the library just download the repository and import the classes as fo
 ### Configuration
 Configure the library is pretty fast and simple. We'll just need to do as follow to have it running on our website: 
 
-`let Langs = new Langs();`
+`let Langs = new Langs();`  
+
 `Langs.langsLibrary(LANGS);`
 
 Where *LANGS* is and array of objects having all the needed translations for our website. In the folder */langs* we have an example of how the languages should be declared and how does the population of these files work. 
