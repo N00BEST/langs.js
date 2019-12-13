@@ -34,7 +34,7 @@ It will render as:
 ### Instalation
 To install the library just download the repository and import the classes as follow in your html document:
 
-`<script src="www.yourdomain.com/path-to-download-folder/Langs.min.js">`
+`<script src="/path-to-download-folder/Langs.min.js">`
 ***
 ### Configuration
 Configure the library is pretty fast and simple. We'll just need to do as follow to have it running on our website: 
@@ -48,4 +48,13 @@ Where *LANGS* is and array of objects having all the needed translations for our
 > We strongly recommend using multiple lang files for ***development porpouse*** but having an unique minified file when going to ***production enviroment*** 
 
 #### Langs Object
-The Langs object accepts an object with multiple configurable options for the translation and renderization to be loaded. 
+The Langs object accepts an object with three configurable options for the translation and renderization to be loaded. 
+
+- **currentLanguage:**
+This attribute sets the language the elements will be translated to. This element should be a defined key in the `langsLibrary` array.
+
+- **langsLibrary:**
+This defines the languages database with all the respective translations for the website. (See *langsLibrary section* below for more details)
+
+- **separator:**
+This parameter tells the translation system if we are using a "dot notation" (.) in our routes system or any other separator we choose to have.
